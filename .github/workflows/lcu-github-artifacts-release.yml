@@ -74,21 +74,21 @@ jobs:
         run: (Get-Content -path package.json -Raw) -replace "version patch","version ${{ steps.versionBump.outputs.new_tag }}-${{ steps.vars.outputs.branchName }} --no-git-tag-version -f" | Set-Content -Path package.json
 
       # run npm commands
-      - uses: actions/setup-node@v2
-        if: ${{ (!!env.InstallCommand || !!env.BuildCommand) && steps.package_json_exists.outputs.files_exists == 'true' }}
-        with:
-          node-version: 14
-          registry-url: ${{ env.NPMRegistry }}
+      # - uses: actions/setup-node@v2
+      #   if: ${{ (!!env.InstallCommand || !!env.BuildCommand) && steps.package_json_exists.outputs.files_exists == 'true' }}
+      #   with:
+      #     node-version: 14
+      #     registry-url: ${{ env.NPMRegistry }}
 
       # install npm dependencies from package-lock.json
-      - name: npm install
-        if: ${{ !!env.InstallCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
-        run: ${{ env.InstallCommand }}
+      # - name: npm install
+      #   if: ${{ !!env.InstallCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
+      #   run: ${{ env.InstallCommand }}
 
       # build npm
-      - name: npm build
-        if: ${{ !!env.BuildCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
-        run: ${{ env.BuildCommand }}
+      # - name: npm build
+      #   if: ${{ !!env.BuildCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
+      #   run: ${{ env.BuildCommand }}
 
       # publish github artifacts
       - name: Archive production artifacts
