@@ -81,9 +81,9 @@ jobs:
       #     registry-url: ${{ env.NPMRegistry }}
 
       # install npm dependencies from package-lock.json
-      # - name: npm install
-      #   if: ${{ !!env.InstallCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
-      #   run: ${{ env.InstallCommand }}
+      - name: npm install
+        if: ${{ !!env.InstallCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
+        run: ${{ env.InstallCommand }}
 
       # build npm
       # - name: npm build
